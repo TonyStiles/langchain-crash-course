@@ -11,7 +11,7 @@ load_dotenv()
 
 
 # Define Tools
-def get_current_time(*args, **kwargs):
+def get_current_time(*args, **kwargs) -> str:
     """Returns the current time in H:MM AM/PM format."""
     import datetime
 
@@ -19,7 +19,7 @@ def get_current_time(*args, **kwargs):
     return now.strftime("%I:%M %p")
 
 
-def search_wikipedia(query):
+def search_wikipedia(query) -> str:
     """Searches Wikipedia and returns the summary of the first result."""
     from wikipedia import summary
 
@@ -45,6 +45,7 @@ tools = [
 ]
 
 # Load the correct JSON Chat Prompt from the hub
+# https://smith.langchain.com/hub/hwchase17/structured-chat-agent
 prompt = hub.pull("hwchase17/structured-chat-agent")
 
 # Initialize a ChatOpenAI model

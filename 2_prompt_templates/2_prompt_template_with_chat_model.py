@@ -13,7 +13,7 @@ print("-----Prompt from Template-----")
 template = "Tell me a joke about {topic}."
 prompt_template = ChatPromptTemplate.from_template(template)
 
-prompt = prompt_template.invoke({"topic": "cats"})
+prompt = prompt_template.invoke({"topic": "red pandas"})
 result = model.invoke(prompt)
 print(result.content)
 
@@ -23,7 +23,7 @@ template_multiple = """You are a helpful assistant.
 Human: Tell me a {adjective} short story about a {animal}.
 Assistant:"""
 prompt_multiple = ChatPromptTemplate.from_template(template_multiple)
-prompt = prompt_multiple.invoke({"adjective": "funny", "animal": "panda"})
+prompt = prompt_multiple.invoke({"adjective": "sad", "animal": "fish"})
 
 result = model.invoke(prompt)
 print(result.content)
@@ -35,6 +35,6 @@ messages = [
     ("human", "Tell me {joke_count} jokes."),
 ]
 prompt_template = ChatPromptTemplate.from_messages(messages)
-prompt = prompt_template.invoke({"topic": "lawyers", "joke_count": 3})
+prompt = prompt_template.invoke({"topic": "programmers", "joke_count": 3})
 result = model.invoke(prompt)
 print(result.content)

@@ -23,13 +23,11 @@ if not os.path.exists(file_path):
     )
 
 # Read the text content from the file
-loader = TextLoader(file_path)
+loader = TextLoader(file_path, encoding="utf-8")
 documents = loader.load()
 
 # Define the embedding model
-embeddings = OpenAIEmbeddings(
-    model="text-embedding-3-small"
-)  # Update to a valid embedding model if needed
+embeddings = OpenAIEmbeddings()#  model="text-embedding-3-small")  # Update to a valid embedding model if needed
 
 
 # Function to create and persist vector store

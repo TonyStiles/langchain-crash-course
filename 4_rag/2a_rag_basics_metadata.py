@@ -31,7 +31,7 @@ if not os.path.exists(persistent_directory):
     documents = []
     for book_file in book_files:
         file_path = os.path.join(books_dir, book_file)
-        loader = TextLoader(file_path)
+        loader = TextLoader(file_path, encoding="utf-8")
         book_docs = loader.load()
         for doc in book_docs:
             # Add metadata to each document indicating its source
@@ -48,15 +48,19 @@ if not os.path.exists(persistent_directory):
 
     # Create embeddings
     print("\n--- Creating embeddings ---")
-    embeddings = OpenAIEmbeddings(
-        model="text-embedding-3-small"
-    )  # Update to a valid embedding model if needed
+    embeddings = OpenAIEmbeddings()#model="text-embedding-3-small")  # Update to a valid embedding model if needed
     print("\n--- Finished creating embeddings ---")
 
     # Create the vector store and persist it
-    print("\n--- Creating and persisting vector store ---")
-    db = Chroma.from_documents(
-        docs, embeddings, persist_directory=persistent_directory)
+    # print("\n--- Creating and persisting vector store ---")
+    # db = Chroma.from_documents(
+    #     docs, embeddings, persist_directory=persistent_directory)
+    
+    batch_size = 5461  # Set to the maximum allowed batch size
+    for i in range(0, len(docs), batch_size):
+        batch = docs[i:i + batch_size]
+        db = Chroma.from_documents(batch, embeddings, persist_directory=persistent_directory)
+    
     print("\n--- Finished creating and persisting vector store ---")
 
 else:

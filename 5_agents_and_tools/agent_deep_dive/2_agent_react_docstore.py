@@ -30,7 +30,7 @@ else:
     )
 
 # Define the embedding model
-embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+embeddings = OpenAIEmbeddings()#model="text-embedding-3-small")
 
 # Load the existing vector store with the embedding function
 db = Chroma(persist_directory=persistent_directory,

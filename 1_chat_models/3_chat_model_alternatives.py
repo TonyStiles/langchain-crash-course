@@ -1,8 +1,8 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_anthropic import ChatAnthropic
-from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
+from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 
 # Setup environment variables and messages
 load_dotenv()
@@ -27,7 +27,13 @@ print(f"Answer from OpenAI: {result.content}")
 
 # Create a Anthropic model
 # Anthropic models: https://docs.anthropic.com/en/docs/models-overview
-model = ChatAnthropic(model="claude-3-opus-20240229")
+model = ChatAnthropic(
+                model="claude-3-sonnet-20240229",
+                temperature=0,
+                max_tokens=1024,
+                timeout=None,
+                max_retries=2
+            )
 
 result = model.invoke(messages)
 print(f"Answer from Anthropic: {result.content}")

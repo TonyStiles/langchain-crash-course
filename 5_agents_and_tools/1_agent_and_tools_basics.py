@@ -12,7 +12,7 @@ load_dotenv()
 
 
 # Define a very simple tool function that returns the current time
-def get_current_time(*args, **kwargs):
+def get_current_time(*args, **kwargs) -> str:
     """Returns the current time in H:MM AM/PM format."""
     import datetime  # Import datetime module to get current time
 
